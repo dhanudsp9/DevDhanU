@@ -1,0 +1,412 @@
+/* Hardware 101 Hero Section Styles */
+
+/* CSS Reset and Base Styles */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #000000;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --accent-color: #00ffaa;
+    --accent-blue: #0066ff;
+    --grid-color: rgba(255, 255, 255, 0.1);
+    --trace-color: rgba(255, 255, 255, 0.8);
+    --symbol-color: rgba(255, 255, 255, 0.3);
+    --glow-color: rgba(0, 255, 170, 0.6);
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* Hero Section Layout */
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--bg-primary);
+}
+
+/* Animation Container */
+.animation-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Layer 1: Circuit Traces */
+.circuit-traces {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    z-index: 1;
+}
+
+.circuit-trace {
+    stroke: var(--trace-color);
+    stroke-width: 1;
+    fill: none;
+    opacity: 0;
+    animation: traceGlow 8s ease-in-out infinite;
+}
+
+.circuit-node {
+    fill: var(--accent-color);
+    opacity: 0.8;
+    animation: nodePulse 3s ease-in-out infinite;
+}
+
+@keyframes traceGlow {
+    0%, 100% { opacity: 0; stroke-width: 1; }
+    50% { opacity: 0.8; stroke-width: 1.5; }
+}
+
+@keyframes nodePulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); filter: drop-shadow(0 0 8px var(--glow-color)); }
+}
+
+/* Layer 2: Symbol Cloud */
+.symbol-cloud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    opacity: 0.4;
+}
+
+.electrical-symbol {
+    position: absolute;
+    color: var(--symbol-color);
+    font-size: 24px;
+    opacity: 0;
+    animation: symbolFloat 12s ease-in-out infinite;
+    user-select: none;
+}
+
+@keyframes symbolFloat {
+    0%, 100% { 
+        opacity: 0; 
+        transform: translateY(0px) rotate(0deg); 
+    }
+    25% { 
+        opacity: 0.6; 
+        transform: translateY(-20px) rotate(5deg); 
+    }
+    75% { 
+        opacity: 0.6; 
+        transform: translateY(-10px) rotate(-5deg); 
+    }
+}
+
+/* Layer 3: Waveform Canvas */
+.waveform-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    opacity: 0.3;
+}
+
+/* Layer 4: Microchip Grid */
+.chip-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-image: 
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(var(--grid-color) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.2;
+    animation: gridShift 20s ease-in-out infinite;
+}
+
+.chip-grid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20px 20px, var(--grid-color) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.5;
+    animation: gridShift 25s ease-in-out infinite reverse;
+}
+
+@keyframes gridShift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(10px, 10px) scale(1.05); }
+}
+
+/* Layer 5: Logic Gates */
+.logic-gates {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    opacity: 0.3;
+}
+
+.logic-gate {
+    position: absolute;
+    color: var(--text-secondary);
+    font-size: 18px;
+    opacity: 0;
+    animation: gateFade 10s ease-in-out infinite;
+    user-select: none;
+}
+
+@keyframes gateFade {
+    0%, 100% { opacity: 0; transform: scale(0.8); }
+    50% { opacity: 0.7; transform: scale(1); }
+}
+
+/* Layer 6: Particle Canvas */
+.particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    opacity: 0.6;
+}
+
+/* Hero Content */
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.hero-text {
+    animation: contentFadeIn 1.5s ease-out;
+}
+
+@keyframes contentFadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Typography */
+.hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.title-main {
+    color: var(--text-primary);
+    display: inline-block;
+}
+
+.title-accent {
+    color: var(--accent-color);
+    font-weight: 600;
+    display: inline-block;
+    margin-left: 0.5rem;
+    text-shadow: 0 0 20px var(--glow-color);
+    animation: titleGlow 4s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+    0%, 100% { text-shadow: 0 0 20px var(--glow-color); }
+    50% { text-shadow: 0 0 30px var(--glow-color), 0 0 40px var(--glow-color); }
+}
+
+.hero-subtitle {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    line-height: 1.4;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* CTA Button */
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 2px solid var(--text-primary);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1.125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--accent-color);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.cta-button:hover {
+    color: var(--bg-primary);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 255, 170, 0.3);
+}
+
+.cta-button:hover::before {
+    left: 0;
+}
+
+.cta-button:active {
+    transform: translateY(0);
+}
+
+.cta-arrow {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.cta-button:hover .cta-arrow {
+    transform: translateX(4px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content {
+        padding: 0 1rem;
+    }
+    
+    .hero-title {
+        margin-bottom: 1rem;
+    }
+    
+    .hero-subtitle {
+        margin-bottom: 2rem;
+    }
+    
+    .cta-button {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .electrical-symbol {
+        font-size: 18px;
+    }
+    
+    .logic-gate {
+        font-size: 14px;
+    }
+    
+    .chip-grid {
+        background-size: 30px 30px;
+    }
+    
+    .chip-grid::before {
+        background-size: 60px 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content {
+        padding: 0 0.5rem;
+    }
+    
+    .electrical-symbol {
+        font-size: 16px;
+    }
+    
+    .logic-gate {
+        font-size: 12px;
+    }
+    
+    .chip-grid {
+        background-size: 25px 25px;
+    }
+    
+    .chip-grid::before {
+        background-size: 50px 50px;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .animation-container {
+        display: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --text-secondary: #ffffff;
+        --symbol-color: rgba(255, 255, 255, 0.8);
+        --grid-color: rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Focus styles for accessibility */
+.cta-button:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 4px;
+}
+
+/* Loading state animation */
+.hero-section.loading .animation-container {
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+.hero-section.loaded .animation-container {
+    opacity: 1;
+}
